@@ -5,6 +5,7 @@ import { UserModule } from 'src/user/user.module';
 import { AuthService } from './auth.service';
 import { jwtConstants } from './constants';
 import { JwtStrategy } from './jwt.strategy';
+import { LocalAuthGuard } from './local.auth.guard';
 import { LocalStrategy } from './local.strategy';
 
 @Module({
