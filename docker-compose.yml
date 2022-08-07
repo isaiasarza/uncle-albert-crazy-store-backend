@@ -1,0 +1,30 @@
+version: '3.3'
+services:
+  uncle_albert_crazy_store_api:
+    container_name: uncle_albert_crazy_store_api
+    image: uncle_albert_crazy_store999/uncle_albert_crazy_store-api
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    command: npm run start
+    ports:
+      - 3000:3000
+      - 3001:9229
+    networks:
+      - nesjs-network
+    depends_on:
+      - mongodb
+  mongodb:
+    image : mongo:latest
+    command: mongod -port 27015
+    container_name: mongodb
+    volumes:
+      - ./database:/data/db
+    ports:
+      - 27015:27015
+    networks:
+      - nesjs-network
+    restart: always
+networks:
+    nesjs-network:
+      driver: bridge
