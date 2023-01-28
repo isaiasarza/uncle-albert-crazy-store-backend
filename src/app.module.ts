@@ -1,3 +1,5 @@
+
+import { GeotrackingModule } from './geotracking/geotracking.module';
 import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 
@@ -9,11 +11,19 @@ import { JwtAuthGuard } from './auth/jwt.auth.guard';
 import { MongooseModule } from '@nestjs/mongoose';
 
 @Module({
-  imports: [MongooseModule.forRoot('mongodb://mongodb:27015/uncle-albert'),AuthModule, UserModule, EcommerceModule],
+  imports: [
+    GeotrackingModule,
+    MongooseModule.forRoot('mongodb://mongodb:27015/uncle-albert'),
+    AuthModule,
+    UserModule,
+    EcommerceModule,
+  ],
   controllers: [AppController],
-  providers:[{
-    provide: APP_GUARD,
-    useClass: JwtAuthGuard,
-  }]
+  providers: [
+    {
+      provide: APP_GUARD,
+      useClass: JwtAuthGuard,
+    },
+  ],
 })
 export class AppModule {}
